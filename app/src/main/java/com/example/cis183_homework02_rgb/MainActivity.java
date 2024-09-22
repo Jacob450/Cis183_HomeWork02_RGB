@@ -27,6 +27,12 @@ public class MainActivity extends AppCompatActivity {
     TextView tv_J_greenNum;
     TextView tv_J_blueNum;
     TextView tv_j_hexNum;
+    TextView tv_j_redText;
+    TextView tv_j_blueText;
+    TextView tv_j_greenText;
+    TextView tv_j_hexText;
+    TextView tv_j_scText;
+
 
     Button btn_j_addColor;
 
@@ -55,6 +61,11 @@ public class MainActivity extends AppCompatActivity {
         btn_j_addColor = findViewById(R.id.btn_v_savecolor);
         cl_J_backRound = findViewById(R.id.main_cc);
         lv_J_listView = findViewById(R.id.listView);
+        tv_j_redText = findViewById(R.id.tv_v_redtext);
+        tv_j_blueText = findViewById(R.id.tv_v_bluetext);
+        tv_j_greenText = findViewById(R.id.tv_v_greentext);
+        tv_j_hexText = findViewById(R.id.tv_v_hextext);
+        tv_j_scText = findViewById(R.id.tv_v_sctext);
 
         colorList = new ArrayList<MyColor>();
         
@@ -66,9 +77,6 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    private void brightnessChecker(){
-
-    }
 
     private void onListClick(){
         lv_J_listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -101,7 +109,7 @@ public class MainActivity extends AppCompatActivity {
                 colorList.add(newColor);
                 //update list view
                 fillListView();
-                //reset backround
+                //reset background
 
 
                 sb_j_red.setProgress(255);
@@ -121,7 +129,7 @@ public class MainActivity extends AppCompatActivity {
                 tv_J_redNum.setText(String.valueOf(sb_j_red.getProgress()));
                 cl_J_backRound.setBackgroundColor(Color.rgb(sb_j_red.getProgress(), sb_j_green.getProgress(), sb_j_blue.getProgress()));
                 tv_j_hexNum.setText(String.format("#%02X%02X%02X", sb_j_red.getProgress(), sb_j_green.getProgress(), sb_j_blue.getProgress()));
-
+                brightnessChange();
 
             }
             @Override
@@ -136,6 +144,7 @@ public class MainActivity extends AppCompatActivity {
                 tv_J_greenNum.setText(String.valueOf(sb_j_green.getProgress()));
                 cl_J_backRound.setBackgroundColor(Color.rgb(sb_j_red.getProgress(), sb_j_green.getProgress(), sb_j_blue.getProgress()));
                 tv_j_hexNum.setText(String.format("#%02X%02X%02X", sb_j_red.getProgress(), sb_j_green.getProgress(), sb_j_blue.getProgress()));
+                brightnessChange();
             }
             @Override
             public void onStartTrackingTouch(SeekBar seekBar) {}
@@ -149,12 +158,41 @@ public class MainActivity extends AppCompatActivity {
                 tv_J_blueNum.setText(String.valueOf(sb_j_blue.getProgress()));
                 cl_J_backRound.setBackgroundColor(Color.rgb(sb_j_red.getProgress(), sb_j_green.getProgress(), sb_j_blue.getProgress()));
                 tv_j_hexNum.setText(String.format("#%02X%02X%02X", sb_j_red.getProgress(), sb_j_green.getProgress(), sb_j_blue.getProgress()));
+                brightnessChange();
             }
             @Override
             public void onStartTrackingTouch(SeekBar seekBar) {}
             @Override
             public void onStopTrackingTouch(SeekBar seekBar) {}
         });
+    }
+
+    private void brightnessChange(){
+        int colorIndex = sb_j_blue.getProgress() + sb_j_green.getProgress() + sb_j_red.getProgress();
+        if(colorIndex < 200){
+            tv_j_redText.setTextColor(Color.WHITE);
+            tv_j_blueText.setTextColor(Color.WHITE);
+            tv_j_greenText.setTextColor(Color.WHITE);
+            tv_j_hexText.setTextColor(Color.WHITE);
+            tv_j_scText.setTextColor(Color.WHITE);
+
+            tv_J_redNum.setTextColor(Color.WHITE);
+            tv_J_greenNum.setTextColor(Color.WHITE);
+            tv_J_blueNum.setTextColor(Color.WHITE);
+            tv_j_hexNum.setTextColor(Color.WHITE);
+        }else {
+            tv_j_redText.setTextColor(Color.BLACK);
+            tv_j_blueText.setTextColor(Color.BLACK);
+            tv_j_greenText.setTextColor(Color.BLACK);
+            tv_j_hexText.setTextColor(Color.BLACK);
+            tv_j_scText.setTextColor(Color.BLACK);
+
+            tv_J_redNum.setTextColor(Color.BLACK);
+            tv_J_greenNum.setTextColor(Color.BLACK);
+            tv_J_blueNum.setTextColor(Color.BLACK);
+            tv_j_hexNum.setTextColor(Color.BLACK);
+        }
+
     }
 
     private void fillListView(){

@@ -43,11 +43,15 @@ public class ColorListAdapter extends BaseAdapter {
             LayoutInflater mInflator = (LayoutInflater) context.getSystemService(MainActivity.LAYOUT_INFLATER_SERVICE);
             view = mInflator.inflate(R.layout.custom_cell, null);
         }
-
+        // Giving custom cell stuff java variables
         TextView redNum = view.findViewById(R.id.tv_v_cc_rednum);
         TextView greenNum = view.findViewById(R.id.tv_v_cc_greennum);
         TextView blueNum = view.findViewById(R.id.tv_v_cc_bluenum);
         TextView hexNum = view.findViewById(R.id.tv_v_cc_hexnum);
+        TextView redText = view.findViewById(R.id.tv_v_cc_redtext);
+        TextView greenText = view.findViewById(R.id.tv_v_cc_greentext);
+        TextView blueText = view.findViewById(R.id.tv_v_cc_bluetext);
+        TextView hexText = view.findViewById(R.id.tv_v_cc_hextext);
         ConstraintLayout backround = view.findViewById(R.id.main_cc);
 
         MyColor color = colorList.get(i);
@@ -58,6 +62,29 @@ public class ColorListAdapter extends BaseAdapter {
         hexNum.setText(color.getHex());
 
         backround.setBackgroundColor(Color.rgb(color.getRed(), color.getGreen(), color.getBlue()));
+
+        //adjusting brightness
+        int colorIndex = color.getBlue()+ color.getGreen() + color.getRed();
+        if(colorIndex < 200){
+             redNum.setTextColor(Color.WHITE);
+             greenNum.setTextColor(Color.WHITE);
+             blueNum.setTextColor(Color.WHITE);
+             hexNum.setTextColor(Color.WHITE);
+             redText.setTextColor(Color.WHITE);
+             greenText.setTextColor(Color.WHITE);
+             blueText.setTextColor(Color.WHITE);
+             hexText.setTextColor(Color.WHITE);
+        }else{
+            redNum.setTextColor(Color.BLACK);
+            greenNum.setTextColor(Color.BLACK);
+            blueNum.setTextColor(Color.BLACK);
+            hexNum.setTextColor(Color.BLACK);
+            redText.setTextColor(Color.BLACK);
+            greenText.setTextColor(Color.BLACK);
+            blueText.setTextColor(Color.BLACK);
+            hexText.setTextColor(Color.BLACK);
+
+        }
 
 
         return view;
